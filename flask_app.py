@@ -62,6 +62,7 @@ def game(game_id, question):
             if session['revealed'] > 4:
                 completed = True
                 correct = False
+                session['stats_string'] += '❌'
     else:
         print(form.errors.items())
 
