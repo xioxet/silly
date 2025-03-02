@@ -5,13 +5,13 @@ from wtforms.validators import DataRequired
 from rapidfuzz import fuzz
 
 import secrets
-
 import json
+import os
 
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(16)
 
-rounds = json.loads(open('rounds.json').read())
+rounds = json.loads(open(f'{os.getcwd()}/rounds.json').read())
 
 class RoundForm(FlaskForm):
     answer = StringField('answer', default='', validators=[DataRequired()], render_kw={'autofocus': True})
