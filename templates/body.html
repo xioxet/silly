@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>available rounds...</h1>
+
+<ol class="mt-5">
+    {% for i in range(avail) %}
+    <a class="cursor-pointer border hover:bg-stone-800 hover:text-white font-bold py-2 px-4 mt-2" href="/game/{{i+1}}/1">game {{i+1}}</a>
+    {% endfor %}
+</ol>
+{% endblock %}

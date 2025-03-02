@@ -1,0 +1,51 @@
+{% from "macros/fields.html" import render_text_field %}
+{% extends 'main.html' %}
+
+{% block content %}
+<div>
+    <h1>round {{ question }} of 10.</h1>
+    <br>
+    <h2 >categories:</h2>
+</div>
+<hr>
+
+<div class="mt-2">
+    <ol>
+    {% for ind in range(rnd['categories'] | length) %}
+        {% if ind <= revealed %}
+            <li>{{ ind + 1 }}: {{ rnd['categories'][ind] }}</li>
+        {% else %}
+            <li>{{ ind + 1 }}: ...</li>
+        {% endif %}
+
+    {% endfor %}
+    </ol>
+</div>
+
+{% if completed %}
+<div class="my-5 {% if correct %} text-lime-900 {% else %} text-red-900 {% endif %}">
+    <div class="font-bold">the correct answer was {{ rnd['answer'] }}!</div>
+    <br>
+    {% if question < 10 %}
+        <a class="text-black border p-3 font-bold hover:text-white hover:bg-stone-800" href="/game/{{ game_id }}/{{ question+1 }}">next question?</a>
+    {% else %}
+        <a class="text-black border p-3 font-bold hover:text-white hover:bg-stone-800" href="/complete/{{ game_id }}">see your stats?</a>
+    {% endif %}
+</div>
+
+{% else %}
+
+<div class="my-5">
+    <form method="post">
+        {{ form.csrf_token }}
+        {{ render_text_field(form.answer) }}
+
+        <div>
+            {{ form.submit(class="cursor-pointer border hover:bg-stone-800 hover:text-white font-bold py-2 px-4 mt-2") }}
+        </div>
+    </form>
+</div>
+
+{% endif %}
+
+{% endblock %}  

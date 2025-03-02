@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>statistics</h1>
+<hr>
+<br>
+
+{% for item in stats %}
+<div class='p-5 border my-1'>
+    <div>correct answer: <span class="text-lime-900 font-bold">{{ item['correct'] }}</span> </div>
+    <div>your guesses:</div>
+    <ol class="pl-3">
+        {% for ind in range(item['guesses'] | length) %}
+        <li>{{ ind + 1 }}. {{ item['guesses'][ind] }}</li>
+        {% endfor %}
+    </ol>
+</div>
+{% endfor %}
+
+
+{% endblock %}
