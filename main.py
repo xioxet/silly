@@ -30,6 +30,9 @@ def game(game_id, question):
 
     if 'stats' not in session:
         session['stats'] = {}
+
+    if 'stats_string' not in session:
+        session['stats_string'] = ''
     
     if session['revealed'] == 5: session['revealed'] = 0
 
@@ -51,6 +54,7 @@ def game(game_id, question):
 
         if crit > 95:
             completed = True
+            session['stats_string'] += "➊➋➌➍➎"[session['revealed']]
             session['revealed'] = 5
             correct = True
         else:
@@ -71,8 +75,7 @@ def complete(game_id):
         if stats_key in session['stats']:
             stats.append(session['stats'][stats_key])
     
-    print(stats)
-    return render_template('stats.html', stats=stats)
+    return render_template('stats.html', stats=stats, stats_string=session['stats_string'], game_id=game_id)
 
 
 

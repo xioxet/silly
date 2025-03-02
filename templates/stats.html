@@ -5,6 +5,11 @@
 <hr>
 <br>
 
+<div class="p-5 border my-5 bg-stone-900 text-white">
+    game {{ game_id }}: <br>
+    <span style="font-size: 30px">{{ stats_string }}</span>
+</div>
+
 {% for item in stats %}
 <div class='p-5 border my-1'>
     <div>correct answer: <span class="text-lime-900 font-bold">{{ item['correct'] }}</span> </div>
@@ -16,6 +21,5 @@
     </ol>
 </div>
 {% endfor %}
-
 
 {% endblock %}
